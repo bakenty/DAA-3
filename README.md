@@ -1,11 +1,11 @@
 # Assignment 3. Maze Escape
 
-Student ID: awaiting the student's ID from Moodle, including any leading zeros.
-Name: awaiting the student's name.
-Group: awaiting the student's group.
-Maze size (rows x columns): pending personal data generation.
+- Student ID (barcode): 252914
+- Name: Yelubek Bakdaulet
+- Group: se-2512
+- Maze size (rows x columns): 8 x 10
 
-The algorithms and technical report are implemented. The personal input files and personal output still require the Student ID; the example output and picture below are explicitly a demonstration, not a personal variant.
+The personal input files were generated from Student ID `252914` using the supplied `MakeVariant` tool. The output and picture below are from this personal 8 x 10 maze.
 
 The assignment is in [docs/Assignment3.pdf](docs/Assignment3.pdf); the starter instructions are in [START_HERE.md](START_HERE.md).
 
@@ -15,11 +15,11 @@ Java 17 or newer is required. Run these commands from the project directory:
 
 ```sh
 javac -d out src/*.java
-java tools/MakeVariant.java YOUR_STUDENT_ID data
+java tools/MakeVariant.java 252914 data
 java -Djava.awt.headless=true -cp out Main
 ```
 
-Replace `YOUR_STUDENT_ID` with the exact ID from Moodle. The last command prints the 13 results and writes `output/maze.png` and `output/maze.html`; open the HTML file in a browser to explore the maze. The headless option lets Java generate the PNG without opening a desktop window, including in environments without a graphical session.
+The generator command recreates the personal input files for Student ID `252914`. The last command prints the 13 results and writes `output/maze.png` and `output/maze.html`; open the HTML file in a browser to explore the maze. The headless option lets Java generate the PNG without opening a desktop window, including in environments without a graphical session.
 
 To run the provided and additional checks:
 
@@ -33,37 +33,40 @@ Validation completed with OpenJDK 21.0.12.1:
 
 - `javac --release 17 -Xlint:all -d out src/*.java` compiles without warnings.
 - The provided `tiny`, `small` and `dag` examples match all 13 expected output lines.
+- The personal variant has 80 cells and 142 walls; Kruskal and Prim both give an MST cost of 25253.
 - DSU checks include self-union, union by size, set counts and a million-element chain.
 - 3,629 additional checks include exhaustive MST enumeration on small grids, a DFS backtracking case, SCC comparison with transitive closure, shortest routes compared with Bellman-Ford, parallel zone edges, isolated components and totals larger than a 32-bit integer.
 - With a 256 KiB Java call stack, DFS handles a 1000 x 1000 snake maze whose route contains 999,001 cells. Kosaraju and zone routing handle a directed chain of 1,000,000 cells.
 
 ## Program output
 
-Personal output is pending the Student ID. This is the verified **tiny example**, produced with:
+Personal results for Student ID `252914`, produced with the files in `data/`:
 
 ```sh
-java -Djava.awt.headless=true -cp out Main examples/tiny/walls.txt examples/tiny/slides.txt
+java -Djava.awt.headless=true -cp out Main
 ```
 
 ```text
-Broken: 3
-Kept: 1
-Last broken wall: 3
-MST cost: 31
-Heaviest broken wall: 17
-Path length: 2
-DFS visited: 3
-Dead ends: 2
-Zones: 3
-Largest zone: 2
+Broken: 79
+Kept: 63
+Last broken wall: 98
+MST cost: 25253
+Heaviest broken wall: 903
+Path length: 26
+DFS visited: 40
+Dead ends: 23
+Zones: 12
+Largest zone: 11
 Is DAG: 0
-Flow stages: 3
-Fastest route cost: 9
+Flow stages: 9
+Fastest route cost: 20
 ```
 
-Demonstration picture for the same tiny example (to be replaced by the personal run):
+The same output is saved in [output/results.txt](output/results.txt).
 
-![Tiny example maze: green start, blue exit and red escape path](output/maze.png)
+Personal maze (green start, blue exit and red escape path):
+
+![Personal 8 x 10 maze for Student ID 252914](output/maze.png)
 
 ## Questions
 
@@ -77,7 +80,7 @@ The complete rectangular grid is connected, and a wall is broken only when it jo
 
 ### Mission 2. MST costs from Kruskal and Prim, and why they are equal
 
-For the tiny example, Kruskal and Prim both give 31; the personal value is pending data generation. Kruskal chooses the cheapest edge that joins different components, while Prim repeatedly chooses the cheapest edge leaving its current tree, and both choices follow the MST cut property. Because all wall costs in the assignment are distinct, the minimum spanning tree is unique, so both algorithms produce the same total cost.
+For my personal maze, Kruskal and Prim both give an MST cost of 25253. Kruskal chooses the cheapest edge that joins different components, while Prim repeatedly chooses the cheapest edge leaving its current tree, and both choices follow the MST cut property. Because all wall costs in the assignment are distinct, the minimum spanning tree is unique, so both algorithms produce the same total cost.
 
 ### Mission 3. Why is there exactly one path, and how is stack overflow avoided?
 
@@ -130,8 +133,8 @@ For a rectangular grid m=O(n), so the MST time bounds can also be written as O(n
 - [x] Implement the mission algorithms and add DSU checks.
 - [x] Pass the provided examples and the additional large-graph checks.
 - [x] Record measured timings, complexity, explanations and AI use.
-- [ ] Enter the student's ID, name and group.
-- [ ] Generate personal `data/walls.txt` and `data/slides.txt`; replace the example output and picture with the personal results.
+- [x] Enter the student's ID, name and group.
+- [x] Generate personal `data/walls.txt` and `data/slides.txt`; record the personal output and picture.
 - [ ] Review the code and rewrite the explanations in the student's own words for the defense.
 - [ ] Create a Git repository on `main`, record progress per mission and push to a public GitHub repository. This workspace currently prevents creation of `.git`, so no commits or publication have been made.
 - [ ] Attach the public repository link in Moodle before the deadline.
